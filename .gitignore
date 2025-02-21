@@ -2,7 +2,6 @@
 __pycache__/
 *.db
 *.pid
-Scripts/net/DCSServerBot/DCSServerBotConfig.lua
 *.csv
 .stignore
 /venv/
@@ -17,4 +16,3 @@ Scripts/net/DCSServerBot/DCSServerBotConfig.lua
 /fonts/
 /Music/
 /logs/
-/config/

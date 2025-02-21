@@ -1,0 +1,47 @@
+DEFAULT:
+  dcs.log:
+    directory: "{instance.home}/Logs"
+    pattern: "*.*"
+    delete_after: 5
+  trackfiles:
+    directory: "{instance.home}/Tracks/Multiplayer"
+    pattern: "*.trk"
+    delete_after: 2
+  greenieboard:
+    directory: "{instance.home}/airboss"
+    pattern:
+    - "*.csv"
+    - "*.png"
+    delete_after: 2
+  tacview:
+    directory: "%USERPROFILE%/Documents/Tacview"
+    pattern: "*.acmi"
+    delete_after: 2
+  channels:
+    channel:                # delete all messages from these channels ...
+      - 844317513374629908  # Ready-room
+      # Public 1
+      - 1342189550168182784 # Public 1 - status
+      - 1342189572913758269 # Public 1 - chat
+      - 1342189591670689922 # Public 1 - tacview
+      - 1342189602462765077 # Public 1 - admin
+      - 1342189624188993596 # Public 1 - voice
+      # Public 2
+      - 1342234760629583962 # Public 2 - status
+      - 1342234774315470950 # Public 2 - chat
+      - 1342234787133259919 # Public 2 - tacview
+      - 1342234798273593365 # Public 2 - admin
+      - 1342234823208603658 # Public 2 - voice
+      # Privé 1
+      - 1340759844524789921 # Privé 1 - status
+      - 1340760411103956992 # Privé 1 - chat
+      - 1340759953153196042 # Privé 1 - tacview
+      - 1340760033041973310 # Privé 1 - admin
+      - 1340760198913986682 # Privé 1 - voice
+      # Privé 2
+      - 1339717459208568852 # Privé 2 - status
+      - 1339718969170595860 # Privé 2 - chat
+      - 1340093874005213274 # Privé 2 - tacview
+      - 1339719730201759744 # Privé 2 - admin
+      - 1340022698172088340 # Privé 2 - voice
+    delete_after: 2         # ... which are older than 2 days

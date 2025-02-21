@@ -1,0 +1,32 @@
+DEFAULT:
+  command_prefix: .
+commands:
+- name: timeleft
+  description: Time left until next server restart
+  roles:
+  - DCS
+  event:
+    sync: true
+    command: getVariable
+    name: TimeLeft
+- name: shutdown_all
+  description: Shutdown all servers
+  roles:
+  - DCS Admin
+  server_only: false       # this event will be sent to ALL servers
+  event:
+    command: shutdown
+- name: startup_all
+  description: Start all servers
+  roles:
+  - DCS Admin
+  server_only: false       # this event will be sent to ALL servers
+  event:
+    command: startup
+- name: restart_all
+  description: Start all servers
+  roles:
+  - DCS Admin
+  server_only: false       # this event will be sent to ALL servers
+  event:
+    command: restart

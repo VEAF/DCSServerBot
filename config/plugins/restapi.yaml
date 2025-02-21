@@ -1,0 +1,4 @@
+DEFAULT:
+  listen: 0.0.0.0   # the interface to bind the internal webserver to
+  port: 9876        # the port the internal webserver is listening on
+  prefix: /serverapi # use this prefix (optional)

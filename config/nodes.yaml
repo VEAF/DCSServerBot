@@ -1,0 +1,142 @@
+dcs-veaf-org:
+  listen_port: 10042 # On which port should the bot listen? Default is 10042
+  listen_address: 127.0.0.1 # Optional: On which interface should the bot listen? Default is 127.0.0.1.
+  slow_system: false # Optional: if you are using a slower PC to run your servers, you should set this to true (default: false)
+  nodestats: true # Enable/disable node statistics (database pool and event queue sizes), default: true
+  DCS:
+    installation: 'C:\DCS World OpenBeta Server' # This is your DCS installation. Usually autodetected by the bot.
+    autoupdate: false # enable auto-update for your DCS servers. Default is false.
+    #    autoupdate:                 # alternative configuration with a message being posted to Discord after every update
+    #      channel: 11223344556677
+    #      title: DCS has been updated to version {}!
+    #      description: 'The following servers have been updated:'
+    #      footer: Please make sure you update your DCS client to join!
+    #      mention:                  # Optional mentioning
+    #        - Admin
+    #        - DCS Admin
+    desanitize: true # Desanitize your MissionScripting.lua after each update. Default is true.
+    minimized: true # Start DCS minimized (default: true)
+  database:
+    url: postgres://dcsserverbot:SECRET@pgadmin.veaf.org:5432/dcsserverbot?sslmode=prefer
+  extensions:
+    SRS:
+      installation: 'C:\Program Files\DCS-SimpleRadio-Standalone'
+      autoupdate: true # auto update your DCS-SRS installation, if a new version is available online (default: false)  instances:
+      host: srs.veaf.org
+      minimized: true # start SRS minimized (default: true)
+      autoconnect: true # install the appropriate DCS-SRS-AutoConnectGameGUI.lua, default: true
+      radio_effect_override: false # optional: disable radio effects (LOS, etc)
+      global_lobby_frequencies: 248.22,30.0,127.0 # optional: set your music channels in here
+      autostart: true # optional: if you manage your SRS servers outside of DCSSB, set that to false
+      always_on: false # start SRS as soon as possible  (includes no_shutdown: true)
+      no_shutdown: false # optional: don't shut down SRS on mission end (default: false)
+    Tacview:
+      installation: '%ProgramFiles(x86)%\Tacview'
+      tacviewExportPath: '%USERPROFILE%\Documents\Tacview'
+      autoupdate: true # if true, the bot will auto-update the tacview mod, if the version of Tacview was updated on your server (default: false)
+      show_passwords: false # hide passwords in your server status embed (default: true)
+      host: dcs.veaf.org # Tacview host (default)
+      LogAnalyser:
+        restart_on_unlist: true # enables the auto-restart on server when unlisting from the ED server list (default: false)
+        message_unlist: "Server is going to restart in {}!" # message to display to users on restarts
+        warn_times: # times when to send the restart messages
+          - 120
+          - 60
+          - 10
+  instances:
+
+    private1_server:
+      bot_port: 7666
+      webgui_port: 21080 # The port of the WebGUI (default: 8088)
+      dcs_port: 10809 # The DCS port of this instance (default: 10308)
+      home: C:\Users\veaf\Saved Games\private1_server
+      missions_dir: 'C:\Users\veaf\Saved Games\DCS.missions\missions' # You can overwrite the default missions dir like so. Default is the Missions dir below the instance home folder.
+      mission_rewrite: true # Disable the re-write of missions by MizEdit or RealWeather. The server will be stopped for any mission change then. (default: true)
+      max_hung_minutes: 3 # maximum heartbeats a server can miss (default: 3)
+      extensions:
+        SRS:
+          config: '%USERPROFILE%\Saved Games\private1_server\Config\SRS.cfg'
+          port: 5102
+          awacs: true # if you use LotAtc
+          lotatc_export_port: 10812
+          blue_password: CarambarPourLesGosses
+          red_password: LePimentCaPique
+        Tacview:
+          tacviewRealTimeTelemetryPort: 42874 # default
+          tacviewRealTimeTelemetryPassword: "" # default
+          tacviewRemoteControlPort: 42875 # default
+          tacviewRemoteControlPassword: "limonade" # default
+          tacviewPlaybackDelay: 600 # default 0, should be 600 for performance reasons
+          target: "<id:1340759953153196042>" # optional: channel id or directory
+
+    private2_server:
+      bot_port: 7667
+      webgui_port: 20080 # The port of the WebGUI (default: 8088)
+      dcs_port: 10508 # The DCS port of this instance (default: 10308)
+      home: C:\Users\veaf\Saved Games\private2_server
+      missions_dir: 'C:\Users\veaf\Saved Games\DCS.missions\missions' # You can overwrite the default missions dir like so. Default is the Missions dir below the instance home folder.
+      mission_rewrite: true # Disable the re-write of missions by MizEdit or RealWeather. The server will be stopped for any mission change then. (default: true)
+      max_hung_minutes: 3 # maximum heartbeats a server can miss (default: 3)
+      extensions:
+        SRS:
+          config: '%USERPROFILE%\Saved Games\private2_server\Config\SRS.cfg'
+          port: 5302
+          awacs: true # if you use LotAtc
+          lotatc_export_port: 10612
+          blue_password: CarambarPourLesGosses
+          red_password: LePimentCaPique
+        Tacview:
+          tacviewRealTimeTelemetryPort: 42974 # default
+          tacviewRealTimeTelemetryPassword: "" # default
+          tacviewRemoteControlPort: 42975 # default
+          tacviewRemoteControlPassword: "limonade" # default
+          tacviewPlaybackDelay: 600 # default 0, should be 600 for performance reasons
+          target: "<id:1340093874005213274>" # optional: channel id or directory
+
+    public1_server:
+      bot_port: 7668
+      webgui_port: 22080 # The port of the WebGUI (default: 8088)
+      dcs_port: 10708 # The DCS port of this instance (default: 10308)
+      home: C:\Users\veaf\Saved Games\public1_server
+      missions_dir: 'C:\Users\veaf\Saved Games\DCS.missions\missions' # You can overwrite the default missions dir like so. Default is the Missions dir below the instance home folder.
+      mission_rewrite: true # Disable the re-write of missions by MizEdit or RealWeather. The server will be stopped for any mission change then. (default: true)
+      max_hung_minutes: 3 # maximum heartbeats a server can miss (default: 3)
+      extensions:
+        SRS:
+          config: '%USERPROFILE%\Saved Games\public1_server\Config\SRS.cfg'
+          port: 5002
+          awacs: true # if you use LotAtc
+          lotatc_export_port: 10712
+          blue_password: CarambarPourLesGosses
+          red_password: LePimentCaPique
+        Tacview:
+          tacviewRealTimeTelemetryPort: 42674 # default
+          tacviewRealTimeTelemetryPassword: "" # default
+          tacviewRemoteControlPort: 42675 # default
+          tacviewRemoteControlPassword: "limonade" # default
+          tacviewPlaybackDelay: 600 # default 0, should be 600 for performance reasons
+          target: "<id:1342189591670689922>" # optional: channel id or directory
+
+    public2_server:
+      bot_port: 7669
+      webgui_port: 23080 # The port of the WebGUI (default: 8088)
+      dcs_port: 10909 # The DCS port of this instance (default: 10308)
+      home: C:\Users\veaf\Saved Games\public2_server
+      missions_dir: 'C:\Users\veaf\Saved Games\DCS.missions\missions' # You can overwrite the default missions dir like so. Default is the Missions dir below the instance home folder.
+      mission_rewrite: true # Disable the re-write of missions by MizEdit or RealWeather. The server will be stopped for any mission change then. (default: true)
+      max_hung_minutes: 3 # maximum heartbeats a server can miss (default: 3)
+      extensions:
+        SRS:
+          config: '%USERPROFILE%\Saved Games\public2_server\Config\SRS.cfg'
+          port: 5202
+          awacs: true # if you use LotAtc
+          lotatc_export_port: 10912
+          blue_password: CarambarPourLesGosses
+          red_password: LePimentCaPique
+        Tacview:
+          tacviewRealTimeTelemetryPort: 42774 # default
+          tacviewRealTimeTelemetryPassword: "" # default
+          tacviewRemoteControlPort: 42775 # default
+          tacviewRemoteControlPassword: "limonade" # default
+          tacviewPlaybackDelay: 600 # default 0, should be 600 for performance reasons
+          target: "<id:1342234787133259919>" # optional: channel id or directory

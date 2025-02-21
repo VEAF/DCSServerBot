@@ -1,0 +1,52 @@
+DEFAULT:
+  server_user: Server admin # Name of the server user #1 (technical user), default is "Admin".
+  show_passwords: true # Do you want the password to be displayed in the server status embed? (default: true)
+  smooth_pause: 5 # Servers that are configured to PAUSE on startup will run for this amount of seconds until they are paused again (default 0 = off)
+  ping_admin_on_crash: true # Ping DCS Admin role in discord, when the server crashed. Default: true
+  validate_missions: true # Check, if your missions can be loaded or not (missing maps, etc). Default: true.
+  profanity_filter: false
+  chat_log:
+    count: 10 # A log file that holds the in-game chat to check for abuse. Tells how many files will be kept, default is 10.
+    size: 1048576 # Max logfile size, default is 1 MB.
+  slot_spamming: # Optional: allow for max x slot changes per y seconds (5 in 5 in the example)
+    message: You have been kicked for slot spamming! # default message for slot spamming
+    check_time: 5 # number of seconds to test
+    slot_changes: 5 # number of slot changes in these number of seconds that are allowed
+  smart_bans: true # Used to disable the smart ban system (usually enabled). Servers that see people getting banned with high number of IPv4 reusage (in CN for instance) want to say false here.
+
+VEAF (www.veaf.org) [fr] - Privé 1: # Your server name, as displayed in the server list and listed in serverSettings.lua
+  autoscan: true # Enable autoscan for new missions (and auto-add them to the mission list). Default: false
+  autoadd: true # Enable auto-adding of uploaded missions (default: true)
+  channels:
+    status: 1340759844524789921 # The Discord channel to display the server status embed and players embed into. Right-click on your channel and select "Copy Channel ID". You can disable it with -1
+    chat: 1340760411103956992 # The Discord channel for the in-game chat replication. You can disable it with setting it to -1.
+    admin: 1340760033041973310 # The channel where you can fire admin commands to this server. You can decide if you want to have a central admin channel or server specific ones. See bot.yaml for more.
+    voice: 1340760198913986682 # The voice channel, where people need to connect to (if force_voice is true).
+
+VEAF (www.veaf.org) [fr] - Privé 2: # Your server name, as displayed in the server list and listed in serverSettings.lua
+  autoscan: true # Enable autoscan for new missions (and auto-add them to the mission list). Default: false
+  autoadd: true # Enable auto-adding of uploaded missions (default: true)
+  channels:
+    status: 1339717459208568852 # The Discord channel to display the server status embed and players embed into. Right-click on your channel and select "Copy Channel ID". You can disable it with -1
+    chat: 1339718969170595860 # The Discord channel for the in-game chat replication. You can disable it with setting it to -1.
+    admin: 1339719730201759744 # The channel where you can fire admin commands to this server. You can decide if you want to have a central admin channel or server specific ones. See bot.yaml for more.
+    voice: 1340022698172088340 # The voice channel, where people need to connect to (if force_voice is true).
+
+VEAF (www.veaf.org) [fr] - Public 1: # Your server name, as displayed in the server list and listed in serverSettings.lua
+  autoscan: false # Enable autoscan for new missions (and auto-add them to the mission list). Default: false
+  autoadd: false # Enable auto-adding of uploaded missions (default: true)
+  channels:
+    status: 1342189550168182784 # The Discord channel to display the server status embed and players embed into. Right-click on your channel and select "Copy Channel ID". You can disable it with -1
+    chat: 1342189572913758269 # The Discord channel for the in-game chat replication. You can disable it with setting it to -1.
+    admin: 1342189602462765077 # The channel where you can fire admin commands to this server. You can decide if you want to have a central admin channel or server specific ones. See bot.yaml for more.
+    voice: 1342189624188993596 # The voice channel, where people need to connect to (if force_voice is true).
+
+VEAF (www.veaf.org) [fr] - Public 2: # Your server name, as displayed in the server list and listed in serverSettings.lua
+  autoscan: false # Enable autoscan for new missions (and auto-add them to the mission list). Default: false
+  autoadd: false # Enable auto-adding of uploaded missions (default: true)
+  channels:
+    status: 1342234760629583962 # The Discord channel to display the server status embed and players embed into. Right-click on your channel and select "Copy Channel ID". You can disable it with -1
+    chat: 1342234774315470950 # The Discord channel for the in-game chat replication. You can disable it with setting it to -1.
+    admin: 1342234798273593365 # The channel where you can fire admin commands to this server. You can decide if you want to have a central admin channel or server specific ones. See bot.yaml for more.
+    voice: 1342234823208603658 # The voice channel, where people need to connect to (if force_voice is true).
+

@@ -1,0 +1,19 @@
+guild_id: 471061487662792715
+autoupdate: true
+use_dashboard: false       # Use the dashboard display for your node. Default is true.
+chat_command_prefix: '-'  # The command prefix to be used for in-game chat commands. Default is "-"
+logging:
+  loglevel: DEBUG           # loglevel, default is DEBUG
+  logrotate_count: 5        # Number of logfiles to keep after rotation. Default is 5.
+  logrotate_size: 10485760  # max size of a logfile, default is 10 MB
+filter:
+  server_name: ^VEAF \(www\.veaf\.org\) \[fr\] - # Filter to shorten your server names on many bot displays. Default is none.
+  # mission_name: ^Operation|_|\(.*\)   # Filter to shorten your mission names on many bot displays. Default is none.
+  tag: "'^[VEAF]'"                     # If your community uses specific tags, this helps with the bots automatch functionality.
+opt_plugins:                          # Optional: list of optional plugins to be loaded and used by the bot
+- serverstats                         # see above
+- tacview
+- discord
+#- restapi
+- commands
+- backup

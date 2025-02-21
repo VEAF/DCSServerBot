@@ -1,0 +1,20 @@
+owner: 819838010052050955
+roles:
+  Admin:
+  - DCS Super Admin
+  DCS Admin:
+  - DCS Admin
+  DCS:
+  - DCS Pilot
+  - Membre VEAF
+  Alert:
+  - DCS Super Admin
+  #GameMaster:
+  #- Membre VEAF
+autorole:                                       # Automatically give roles to people, depending on conditions (see below). The roles need to be set up in your Discord server.
+  linked: DCS Pilot                             # Give people that get linked the DCS Pilot role.
+  online: DCS Online
+channels:
+  audit: 1339713555024580731
+  admin: 1339713555024580731                 # Optional: Central admin channel (see below).
+discord_status: Managing DCS servers ...        # Message to be displayed as the bots Discord status. Default is none.
