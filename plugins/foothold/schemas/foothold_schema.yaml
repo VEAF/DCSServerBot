@@ -1,0 +1,43 @@
+type: map
+mapping:
+  enabled:
+    type: bool
+    required: false
+  update_interval:
+    type: int
+    required: false
+  web:
+    type: map
+    required: false
+    mapping:
+      host:
+        type: str
+        required: false
+      port:
+        type: int
+        required: false
+  map:
+    type: map
+    required: false
+    mapping:
+      url_tiles:
+        type: str
+        required: false
+      alternative_tiles:
+        type: seq
+        required: false
+        sequence:
+          - type: map
+            mapping:
+              name:
+                type: str
+                required: true
+              url:
+                type: str
+                required: true
+      min_zoom:
+        type: int
+        required: false
+      max_zoom:
+        type: int
+        required: false
