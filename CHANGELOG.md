@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - PYTHONPATH configuration for test execution
 - Zone neutral state handling in campaign progress calculations
 - Player data loading from Lua save files
+- Configuration inconsistencies between app/config.py and config.py (unified port to 8081 and title)
 
 ### Changed
 - Updated test framework to use proper plugin module structure

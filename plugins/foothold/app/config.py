@@ -30,7 +30,7 @@ def load_config_str(config_dict: dict[str, Any]) -> AppConfig:
     """Load configuration from dictionary with environment variable expansion."""
     # Apply default values
     defaults = {
-        "web": {"host": "0.0.0.0", "port": 8080, "title": "Foothold Sitac Server"},
+        "web": {"host": "0.0.0.0", "port": 8081, "title": "Foothold Sitac"},
         "map": {
             "url_tiles": "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
             "min_zoom": 8,

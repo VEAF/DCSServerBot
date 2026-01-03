@@ -41,9 +41,7 @@ DCS.release_server:
 
 ## Discord Commands
 
-- `/foothold status [server]` - Show campaign progress and statistics
-- `/foothold zones [server]` - List all zones with their status
-- `/foothold mission [server]` - Show active missions information
+- `/foothold <server>` - Show campaign progress, zone statistics, and mission information with rich embedded display
 
 ## Web Interface
 

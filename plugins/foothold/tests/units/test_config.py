@@ -57,8 +57,8 @@ def test_load_config_str_defaults() -> None:
 
     # THEN
     assert cfg.web.host == "0.0.0.0"
-    assert cfg.web.port == 8080
-    assert cfg.web.title == "Foothold Sitac Server"
+    assert cfg.web.port == 8081
+    assert cfg.web.title == "Foothold Sitac"
 
 
 def test_load_config_str_env_expansion(monkeypatch: pytest.MonkeyPatch) -> None:

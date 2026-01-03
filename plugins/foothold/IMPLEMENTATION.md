@@ -50,7 +50,7 @@ The Foothold plugin has been successfully migrated from the standalone foothold-
 - Graceful shutdown
 
 ### 4. Discord Commands
-- `/foothold status [server]` - Campaign progress and statistics with rich embeds
+- `/foothold <server>` - Campaign progress, zone statistics, and mission information with rich embeds
 - Color-coded zones (red/blue/neutral)
 - Progress bar visualization
 - Data age indicator
