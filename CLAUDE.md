@@ -8,3 +8,4 @@ Toute PR destinée à `Special-K-s-Flightsim-Bots/DCSServerBot` se base sur `ups
 
 - `git fetch upstream`, puis créer la branche depuis `upstream/development`.
 - Ouvrir la PR avec `--base development` sur le dépôt upstream.
+- `CLAUDE.md` n'existe que dans notre fork et ne doit jamais arriver chez SpecialK. Avant d'ouvrir la PR, vérifier que `git diff --stat upstream/development...HEAD` ne liste pas `CLAUDE.md` (ni aucun autre fichier propre à VEAF).
