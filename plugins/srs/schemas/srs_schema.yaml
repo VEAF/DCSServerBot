@@ -32,6 +32,11 @@ schema;element_schema:
       range: {min: 2, max: 2}
       sequence:
         - type: int
+    atc_exempt_unit_types:
+      type: seq
+      nullable: false
+      sequence:
+        - type: str
 
 type: map
 func: check_main_structure
