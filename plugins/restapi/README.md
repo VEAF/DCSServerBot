@@ -53,7 +53,7 @@ The following commands are available through the API. For detailed parameter def
 | /instance/mission/unpause | POST | server_name: string | Unpause the mission on a given server. |
 | /instance/missions | GET | server_name: string | Return all missions for a given server. |
 | /instance/restart | POST | server_name: string | Restart a server. |
-| /instance/shutdown | POST | server_name: string, [force: bool], [maintenance: bool], [when_empty: bool] | Shut a server down (terminates the DCS process), like /server shutdown. Defaults: force=false, maintenance=true, when_empty=false. With when_empty=true and players connected, the shutdown waits until the server is empty (needs the Scheduler plugin) and the response status is "pending"; 409 if an action is already pending. |
+| /instance/shutdown | POST | server_name: string, [force: bool], [maintenance: bool], [when_empty: bool] | Shut a server down (terminates the DCS process), like /server shutdown. Defaults: force=false, maintenance=true, when_empty=false. force kills the process at once, but never cuts a session with when_empty. With when_empty=true and players connected, the shutdown waits until the server is empty (needs the Scheduler plugin) and the response status is "pending"; 409 if an action is already pending. |
 | /instance/start | POST | server_name: string | Start a server. |
 | /instance/stop | POST | server_name: string | Stop a server. |
 | /leaderboard | GET | what: string, [order: string], [query: string | None], [limit: int | None], [offset: int | None], [server_name: string | None] | Get leaderbord information |
