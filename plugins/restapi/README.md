@@ -53,6 +53,7 @@ The following commands are available through the API. For detailed parameter def
 | /instance/mission/unpause | POST | server_name: string | Unpause the mission on a given server. |
 | /instance/missions | GET | server_name: string | Return all missions for a given server. |
 | /instance/restart | POST | server_name: string | Restart a server. |
+| /instance/shutdown | POST | server_name: string, [force: bool], [maintenance: bool], [when_empty: bool] | Shut a server down (terminates the DCS process), like /server shutdown. Defaults: force=false, maintenance=true, when_empty=false. With when_empty=true and players connected, the shutdown waits until the server is empty (needs the Scheduler plugin) and the response status is "pending"; 409 if an action is already pending. |
 | /instance/start | POST | server_name: string | Start a server. |
 | /instance/stop | POST | server_name: string | Stop a server. |
 | /leaderboard | GET | what: string, [order: string], [query: string | None], [limit: int | None], [offset: int | None], [server_name: string | None] | Get leaderbord information |
@@ -63,6 +64,7 @@ The following commands are available through the API. For detailed parameter def
 | /mission/unit | GET | server_name: string, unit_name: string | Get mission unit data including current position, loadout, navaids, and waypoints. |
 | /mission/upload | POST | server_name: string, file: string, filename: string, load_after: bool | Upload a .miz mission file to the server. |
 | /modulestats | POST | nick: string, [date: string | None], [server_name: string | None] | Get module statistics |
+| /node/restart | POST | [node_name: string] | Restart a node, or all nodes (default), like /node restart. The bot reloads its configuration. The response is sent before the node serving the API restarts. |
 | /player_info | POST | nick: string, [date: string | None], [server_name: string | None] | Get player information |
 | /player_squadrons | POST | nick: string, [date: string | None] | List of player squadrons |
 | /server_attendance | GET | [server_name: string] | Get detailed server attendance statistics |
