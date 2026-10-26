@@ -1,0 +1,27 @@
+[project]
+name = "dcssb-mcp"
+version = "0.1.0"
+description = "A local MCP server that lets an AI assistant diagnose and operate DCSServerBot through its RestAPI"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+dependencies = [
+    "mcp>=2.3,<3",
+    "httpx>=0.27",
+]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[project.scripts]
+dcssb-mcp = "dcssb_mcp.server:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["dcssb_mcp"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
