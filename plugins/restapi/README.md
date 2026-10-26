@@ -85,6 +85,37 @@ The following commands are available through the API. For detailed parameter def
 > To get more detailled API documentation with test options, please enable debug in your WebService config and 
 > access https://localhost:9876/docs.
 
+## Log endpoints
+`/node/logs` and `/node/log` read the bot log (`logs/dcssb-<node>.log` and its rotated files), `/instance/logs` and `/instance/log` read the DCS log of a server (`dcs.log`, `dcs.log.old` and the `dcs-YYYYMMDD-HHMMSS.log` copies the bot makes at shutdown).
+They are meant for diagnostic tools: why does this server not start, what did the bot do at 03:00, did the ED login fail.
+
+| API            | GET / POST | Parameters                                                                                   |
+|----------------|------------|----------------------------------------------------------------------------------------------|
+| /node/logs     | GET        | [node_name: string]                                                                          |
+| /node/log      | GET        | [node_name: string], [file], [contains], [level], [since], [until], [lines], [tail], [cursor] |
+| /instance/logs | GET        | server_name: string                                                                          |
+| /instance/log  | GET        | server_name: string, [file], [contains], [level], [since], [until], [lines], [tail], [cursor] |
+
+* **They exist only when an `api_key` is set**: logs contain player names, UCIDs and IP addresses.
+* A file is chosen by node or server, then optionally by a name taken from the listing. A path is never accepted.
+* Filters: `contains` (case-insensitive text, repeat it to require several terms), `level` (minimum: `debug`, `info`, `warning`, `error`, `critical`), `since` and `until` (ISO 8601, UTC if no offset, or a duration such as `30m`, `2h`, `1d`), `lines` (200 by default, 2000 at most), `tail` (the last matching entries, or the first ones with `false`).
+* The lines that follow an entry without a timestamp of their own (a Python traceback, a multi-line Lua error) stay with that entry, so a level filter never cuts a traceback.
+* Each answer carries a `cursor`. Pass it back to get only what was written since. It survives a log rotation: the end of the old file is read first, then the new one (`rotated: true`, and `new_file_at` says where the new file starts in `lines`); if the old file is gone, `gap: true` says lines may be missing.
+* Every read is bounded (16 MiB read, 1 MiB returned, lines cut at 8 KiB); `more: true` says a limit was reached.
+* **This version reads the files of the node that serves the RestAPI only**: a server or a bot log on another node answers 501. DCSServerBot 3.0.5 reads every node.
+
+```bash
+# the last warnings and errors of a server, with a cursor
+curl -s -H "X-API-Key: $KEY" "https://bot.example.org/instance/log?server_name=my_instance&level=warning&lines=50"
+# later: only what was written since
+curl -s -H "X-API-Key: $KEY" "https://bot.example.org/instance/log?server_name=my_instance&cursor=<cursor of the previous answer>"
+# the ED logins of the last two hours
+curl -s -H "X-API-Key: $KEY" "https://bot.example.org/instance/log?server_name=my_instance&contains=ASYNCNET&since=2h"
+```
+
+> [!IMPORTANT]
+> Never publish the API without HTTPS: put a reverse proxy (Caddy, nginx, IIS) in front of it, and keep the WebService listening on `127.0.0.1`.
+
 ## New Features
 
 ### Weather Information
