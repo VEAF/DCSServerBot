@@ -81,10 +81,11 @@ def format_log(data: dict) -> str:
 
 
 _SECRET_KEY = re.compile(r"pass|secret|token|api_?key", re.I)
-#: a "Pass: ..." / "password = ..." inside a text, hidden to the end of the line (the SRS extension shows its EAM
-#: passwords that way; Olympus labels its passwords by role)
-_SECRET_TEXT = re.compile(r"((?:pass(?:word)?|secret|token|game\s*master|commander|observer|artillery)\w*\s*[:=]\s*)"
-                          r"[^\n]+", re.I)
+#: a line of an extension's text that holds a password: "🔹 Pass: ..." (SRS, LotAtc), "- Password: ..." (Tacview),
+#: "🔹 Commander: ..." (Olympus labels its passwords by role). Anchored at the start of the line, after symbols only,
+#: so that "Commanders: join SRS" or "Compass: 270" in a description are left alone.
+_SECRET_TEXT = re.compile(r"^([^\w\n]*(?:pass(?:word)?|secret|token|game\s*master|commander|observer|artillery)"
+                          r"[ \t]*[:=][ \t]*)[^\n]+", re.I | re.M)
 
 
 def _strip_passwords(data: Any) -> Any:

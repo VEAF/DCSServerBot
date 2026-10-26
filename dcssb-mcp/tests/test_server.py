@@ -248,6 +248,15 @@ class TestSecrets:
             assert secret not in result
         assert "srs.example.org:5002" in result and "port 10310" in result
 
+    def test_redaction_leaves_ordinary_text_alone(self):
+        servers = [{"name": "srv", "description": "Commanders: join SRS 251.0\nCompass: 270\nBypass: none",
+                    "extensions": [{"name": "Tacview", "value": "- Port: 42674\n- Password: tacpw\n"},
+                                   {"name": "Olympus", "value": "http://x\n▫️ GameMaster: \n🔹 Commander: bluepw"}]}]
+        server, _, _ = make(responses={"/servers": (200, servers)})
+        result = text_of(call(server, "list_servers"))
+        assert "Commanders: join SRS 251.0" in result and "Compass: 270" in result and "Bypass: none" in result
+        assert "tacpw" not in result and "bluepw" not in result and "42674" in result
+
     def test_config_path_with_tilde(self, tmp_path, monkeypatch):
         monkeypatch.setenv("HOME", str(tmp_path))
         monkeypatch.setenv("USERPROFILE", str(tmp_path))
