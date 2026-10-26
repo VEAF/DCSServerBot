@@ -16,12 +16,12 @@ It only talks to the RestAPI, plus, if you configure it, a few fixed read-only c
 
 | Tool | What it does | Available |
 |---|---|---|
-| `list_servers` | servers, status, mission, players, next restart (the server password is hidden) | always |
+| `list_servers` | servers, status, mission, players, next restart (passwords are hidden, the SRS/LotAtc ones too) | always |
 | `list_missions` | missions of a server | always |
 | `list_log_files` | files of a server's `dcs.log` or of a node's bot log | always |
 | `read_log` | read a log, filtered (level, text terms, time window), with a cursor to get only the new lines | always |
 | `start_server`, `stop_server`, `restart_server` | the same as `/server start`, `stop`, `restart` | `allow_actions = true` |
-| `shutdown_server` | graceful shutdown of the DCS process, optionally when the server is empty | `allow_actions = true` |
+| `shutdown_server` | shutdown of the DCS process like `/server shutdown`, optionally when the server is empty | `allow_actions = true` |
 | `load_mission`, `restart_mission`, `pause_mission`, `unpause_mission` | mission control | `allow_actions = true` |
 | `restart_node` | restart one bot node (the DCS servers keep running) | `allow_actions = true` |
 | `host_dcs_processes` | DCS processes as Windows sees them (finds a leftover DCS the bot lost track of) | SSH configured |
@@ -33,7 +33,7 @@ There is also a prompt, `diagnose_server`, that walks the assistant through a di
 
 What it deliberately does **not** do, and why:
 
-* **No process kill, ever.** The RestAPI can force a shutdown by killing DCS; this tool never asks for it. Killing a DCS process can leave its session with ED open and break the login of the next start (we have seen a 401 on another server after such a kill). The bot knows how to stop DCS properly: let it.
+* **No process kill.** The RestAPI can force a shutdown by killing DCS at once; this tool never asks for it. Its `shutdown_server` is `/server shutdown`: the bot asks DCS to quit, and ends the process only if DCS is still there after 30 seconds (60 with `slow_system`). Killing a DCS process outright can leave its session with ED open and break the login of the next start (we have seen a 401 on another server after such a kill). The bot knows how to stop DCS properly: let it.
 * **No free command.** The SSH checks are four fixed PowerShell scripts whose only parameters are numbers. There is no way to make the tool run anything else on your server.
 * **No restart of every node at once**, no mission upload, no warehouse or airbase changes, no statistics.
 * **Actions are off until you turn them on**, and each one is marked destructive, so your MCP client asks you before running it.
@@ -146,6 +146,7 @@ Later, `read_log` with the cursor of its last answer returns only the new lines,
 * **The API key is mandatory** for the log endpoints, even on the bot's machine. Keep it in a file, not in the MCP client's JSON (which is often synced or shared).
 * **Never expose the API without HTTPS.** The key travels in a header: over plain HTTP anyone on the way can read it.
 * **Logs contain personal data**: player names, UCIDs, IP addresses. What the tool reads goes to your AI assistant's provider. Use it on your own servers, and follow your community's privacy rules.
+* **Logs contain other people's text**: what players type in the chat ends up in `dcs.log`. The tool frames log lines as data and tells the assistant never to follow instructions found in them, but a determined text can still try; this is one more reason to keep actions off, or to read each action the assistant proposes before you accept it.
 * **Actions act on live servers.** Leave `allow_actions` off unless you need it, and read what the assistant proposes before you accept.
 * **SSH**: use a dedicated account with the least rights that can still read processes and the event log; the tool never needs an administrator.
 

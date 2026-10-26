@@ -44,8 +44,9 @@ class RestApi:
         except httpx.TimeoutException:
             raise ApiError(f"{method} {path}: no answer from the bot within {self.config.timeout:g} s.") from None
         except httpx.HTTPError as ex:
-            # the exception text names the URL, never the headers
-            raise ApiError(f"{method} {path}: cannot reach the bot ({type(ex).__name__}: {ex}).") from None
+            # an exception text can quote a header: never let the key through
+            reason = str(ex).replace(self.config.api_key.reveal(), str(self.config.api_key))
+            raise ApiError(f"{method} {path}: cannot reach the bot ({type(ex).__name__}: {reason}).") from None
         if response.is_success:
             try:
                 return response.json()

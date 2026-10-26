@@ -86,7 +86,7 @@ def load_config(path: str | None = None, env: dict[str, str] | None = None) -> C
     data: dict = {}
     if path:
         try:
-            data = tomllib.loads(Path(path).read_text(encoding="utf-8"))
+            data = tomllib.loads(Path(os.path.expanduser(str(path))).read_text(encoding="utf-8"))
         except FileNotFoundError:
             raise ConfigError(f"Config file '{path}' not found.") from None
         except tomllib.TOMLDecodeError as ex:
@@ -110,10 +110,13 @@ def load_config(path: str | None = None, env: dict[str, str] | None = None) -> C
         except OSError as ex:
             raise ConfigError(f"Cannot read the API key file '{key_file}' ({ex.strerror}).") from None
     else:
-        key = str(get("api_key", "") or "")
+        key = str(get("api_key", "") or "").strip()
     if not key:
         raise ConfigError("No API key: set 'api_key_file' (preferred) or 'api_key' in the config file, "
                           "or DCSSB_API_KEY_FILE / DCSSB_API_KEY.")
+    if not re.fullmatch(r"[\x21-\x7e]+", key):
+        # an HTTP client refusing the header would quote it in its error message
+        raise ConfigError("The API key may only hold visible ASCII characters (no space, no line break).")
 
     prefix = str(get("prefix", "") or "").strip().rstrip("/")
     if prefix and not prefix.startswith("/"):
